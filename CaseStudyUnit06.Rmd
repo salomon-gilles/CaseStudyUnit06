@@ -1,0 +1,95 @@
+---
+title: "Case Study Unit06"
+author: "Salomon Gilles"
+date: "June 17, 2016"
+output: 
+  html_document: 
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE}
+knitr::read_chunk("LoadMergeData.R")
+```
+
+
+```{r loadData, echo=FALSE}
+```
+
+## INTRODUCTION
+
+This study is a report of the top 190 world economies for the year 2012 as reported by the World Bank. Data is provided for various economic indicators, but our focus is on the size of the country’s economy, i.e. its GDP which gives its ranking among the other countries, and the income level or group to which it belongs. We use various steps and tools to analyze the data and extract the necessary facts. Finally, it said a picture is worth a thousand words, so we use tables and graphs to give a vivid summary of our report.
+
+## DATA ACQUISITION
+
+The data we will be using for the study come from the World Bank. There are two files named getdataFdataFGDP.csv and getdataFdataFEDSTATS_Country.csv respectively. Both files are housed at the following URL: <https://d396qusza40orc.cloudfront.net>. One contains GDP data ranking information for the top 190 economies and the other contains matching income data for the same countries based on their GDP.
+
+- Downloading:
+    - in this phase we execute the code that actually pulls the two data files from the specified URL into our project
+    - ##### Downloading FGDP and FSTAT data files from internet #####
+
+- Tidying:  
+    - In the tidy phase, we take a pick at the data to determine it's type/content, fields needed, also if it needs cleaning
+      - we need only four fields from the GDP data structure: CountryCode, Ranking, Country and Gdp. Extract only those fields
+      - for the FSTAT data, we need only the CountryCode and the IncomeGroup data fields
+    - So  we extract the four fields in the GDP data into a data set
+    - we also extract the two fields in the FSTAT data into a separate data set
+    - after examining the data, we clean:
+      - GDP field contains commas which make it unsuitable for math.
+        - we remove all commas
+        - convert the field to numeric type so we can do math 
+        - we also adjust field names
+      - The STAT data is good all we do is adjust the name field for IncomeGroup
+      - clean all data for for computation and display as neeeded
+
+- Merging:
+
+    - Now that we have sorted out the issues, all we need to do is merge the data for analysis
+
+## ANALYSIS
+####1. The number of IDs matched by using the short country code is displayed below.####
+
+```{r mergedMatchingCountData}
+```
+
+####2. After sorting the dataset in ascending order, the following code displays the thirteenth country.####
+
+```{r thirteenCountryData}
+```
+
+####3. The number of IDs with NAs or missing some other data are ####
+
+```{r mergeMissingCountData}
+```
+
+####4. The the average GDP rankings for the "High income: OECD" and "High income: nonOECD" groups respectively,  are:####
+
+```{r highOecdNhighNonOecdAvgData}
+```
+
+####5. Country GDP plotted color-coded using ggplot2 with five distinct colors representng the five income groups####
+
+```{r ggplotData}
+
+```
+
+####6. The summary of total GDP in terms of income per quartile.####
+
+```{r quantilInfo}
+```
+
+####7. About 5 of the top 38 GDPs fall within lower middle income ####
+
+Having a large GDP does not necessarily translate into high income. We have reviewed the economies of the top 38 GDPs but a handful of them fall in the lower middle income category.
+
+```{r lmiCountryWithHighGdpData}
+```
+
+## CONCLUSION
+We have analyzed the World Bank GDP and income statistical data for 2012. The US GDP by far surpasses that of most countries, followed by the economies of several western countries, Japan and China. Our analysis also looks at the world economy through five income groups and uses graphs to paint a clear picture. This report could serve as a great tool for strategic planning and investment.
+
+However, one last point to note is that even though the gross domestic product of a some countries is really high, it does not directly translate to high income for its citizens.
+
